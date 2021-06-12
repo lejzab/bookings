@@ -12,11 +12,11 @@
     <style>
         .my-footer {
             height: 5em;
-            background-color: darkgreen;
-            color: beige;
-            font-size: 80%;
+            background-color: #163b65;
             margin-top: 1.5em;
             padding: 1em;
+            color: white;
+            font-size: 80%;
         }
 
         .room-image {
@@ -53,8 +53,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="generals.html">General's Querters</a>
                     <a class="dropdown-item" href="majors.html">Major's Suite</a>
-                    <!--                    <div class="dropdown-divider"></div>-->
-                    <!--                    <a class="dropdown-item" href="#">Something else here</a>-->
                 </div>
             </li>
             <li class="nav-item">
@@ -70,20 +68,29 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
             <h1 class="mt-4">Search for availability</h1>
-            <form action="" >
-                <div class="form-group">
-                    <label for="start_date">Starting date</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
-                    <small id="startDateHelp" class="form-text text-muted">Enter your starting   date in format YYYY-MM-DD</small>
+            <form action="">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="start_date">Starting date</label>
+                            <input required type="date" class="form-control" id="start_date" name="start_date"
+                                   aria-describedby="startDateHelp">
+                            <small id="startDateHelp" class="form-text text-muted">Enter your starting date</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="end_date">Ending date</label>
+                            <input required type="date" class="form-control" id="end_date" name="end_date"
+                                   aria-describedby="endDateHelp">
+                            <small id="endDateHelp" class="form-text text-muted">Enter your ending date</small>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="end_date">Ending date</label>
-                    <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
-                    <small id="endDateHelp" class="form-text text-muted">Enter your ending date in format YYYY-MM-DD</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Search for availability…</button>
             </form>
         </div>
     </div>
@@ -91,18 +98,20 @@
 
 </div>
 
+<footer class="my-footer">
+    <div class="row">
+        <div class="col">
+            left
+        </div>
+        <div class="col">
+            center
+        </div>
+        <div class="col">
+            right
+        </div>
+    </div>
+</footer>
 
-<div class="row my-footer">
-    <div class="col">
-        left
-    </div>
-    <div class="col">
-        middle
-    </div>
-    <div class="col">
-        right
-    </div>
-</div>
 
 <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>-->
