@@ -12,7 +12,7 @@
     <!--          href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">-->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <style>
         .my-footer {
             height: 5em;
@@ -22,15 +22,9 @@
             color: white;
             font-size: 80%;
         }
-
         .room-image {
             max-width: 50%;
         }
-
-        .redText {
-            color: red;
-        }
-
     </style>
 </head>
 <body>
@@ -94,6 +88,8 @@
     </div>
 </div>
 
+<button id="testBtn" class="btn btn-outline-secondary">test click</button>
+
 <footer class="my-footer">
     <div class="row">
         <div class="col">
@@ -120,6 +116,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
 
+<script src="https://unpkg.com/notie"></script>
+
 <script>
     console.log("piszę z javascript!");
 
@@ -144,6 +142,23 @@
     const rangepicker = new DateRangePicker(elem, {
         format: 'yyyy-mm-dd',
     });
+
+    function notify(msg, msgType) {
+        notie.alert({
+            type: msgType, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+            text: msg,
+            // stay: Boolean, // optional, default = false
+            time: 2, // optional, default = 3, minimum = 1,
+            // position: String // optional, default = 'top', enum: ['top', 'bottom']
+        })
+    }
+
+
+    document.getElementById('testBtn').addEventListener('click', function () {
+        notify('test click', 'error')
+    })
+
+
 </script>
 
 </body>
