@@ -22,6 +22,7 @@
             color: white;
             font-size: 80%;
         }
+
         .room-image {
             max-width: 50%;
         }
@@ -113,13 +114,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
-
 <script src="https://unpkg.com/notie"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    console.log("piszę z javascript!");
+    let attention = Prompt();
 
     (function () {
         'use strict';
@@ -153,11 +153,77 @@
         })
     }
 
+    function notifyModal(title, text, icon, confirmButtonText) {
+        Swal.fire({
+            title: title,
+            html: text,
+            icon: icon,
+            confirmButtonText: confirmButtonText
+        });
+    }
 
     document.getElementById('testBtn').addEventListener('click', function () {
-        notify('test click', 'error')
+        attention.error({msg: 'Hello world', title: '¿success or not?'});
     })
 
+    function Prompt() {
+        let toast = function (c) {
+            const {
+                msg = '',
+                icon = 'success',
+                position = 'top-end',
+            } = c
+            const Toast = Swal.mixin({
+                toast: true,
+                title: msg,
+                position: position,
+                icon: icon,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire();
+        }
+        let success = function (c) {
+            const {
+                msg = '',
+                title = '',
+                footer = '',
+            } = c
+            Swal.fire({
+                icon: 'success',
+                title: title,
+                text: msg,
+                footer: footer,
+            })
+
+        }
+        let error = function (c) {
+            const {
+                msg = '',
+                title = '',
+                footer = '',
+            } = c
+            Swal.fire({
+                icon: 'error',
+                title: title,
+                text: msg,
+                footer: footer,
+            })
+
+        }
+
+        return {
+            toast: toast,
+            success: success,
+            error: error,
+        }
+    }
 
 </script>
 
