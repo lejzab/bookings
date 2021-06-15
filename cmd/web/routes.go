@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/lejzab/bookings/pkg/config"
-	"github.com/lejzab/bookings/pkg/handlers"
+	"github.com/lejzab/bookings/internal/config"
+	"github.com/lejzab/bookings/internal/handlers"
 	"net/http"
 )
 

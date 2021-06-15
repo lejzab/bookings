@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/lejzab/bookings/pkg/config"
-	"github.com/lejzab/bookings/pkg/handlers"
-	"github.com/lejzab/bookings/pkg/render"
+	"github.com/lejzab/bookings/internal/config"
+	"github.com/lejzab/bookings/internal/handlers"
+	"github.com/lejzab/bookings/internal/render"
 	"log"
 	"net/http"
 	"time"

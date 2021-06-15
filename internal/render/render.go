@@ -3,8 +3,8 @@ package render
 import (
 	"fmt"
 	"github.com/justinas/nosurf"
-	"github.com/lejzab/bookings/pkg/config"
-	models2 "github.com/lejzab/bookings/pkg/models"
+	"github.com/lejzab/bookings/internal/config"
+	"github.com/lejzab/bookings/internal/models"
 	"html/template"
 	"log"
 	"net/http"
@@ -20,13 +20,13 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // AddDefaultData adds default date to template data
-func AddDefaultData(td *models2.TemplateData, r *http.Request) *models2.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
 	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate renders template using html/template
-func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models2.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
