@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/lejzab/bookings/pkg/config"
-	"github.com/lejzab/bookings/pkg/handlers"
-	"github.com/lejzab/bookings/pkg/render"
+	config2 "github.com/lejzab/bookings/internal/config"
+	handlers2 "github.com/lejzab/bookings/internal/handlers"
+	render2 "github.com/lejzab/bookings/internal/render"
 	"log"
 	"net/http"
 	"time"
@@ -13,7 +13,7 @@ import (
 
 const portNumber = ":8080"
 
-var app config.AppConfig
+var app config2.AppConfig
 var session *scs.SessionManager
 
 // main is the main function
@@ -28,15 +28,15 @@ func main() {
 	session.Cookie.Secure = app.InProduction
 	app.Session = session
 
-	tc, err := render.CreateTemplateCache()
+	tc, err := render2.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("could not create template cache")
 	}
 	app.TemplateCache = tc
 	app.UseCache = false
-	render.NewTemplates(&app)
-	repo := handlers.NewRepo(&app)
-	handlers.NewHandlers(repo)
+	render2.NewTemplates(&app)
+	repo := handlers2.NewRepo(&app)
+	handlers2.NewHandlers(repo)
 
 	fmt.Printf("Starting application on address %s\n", portNumber)
 	srv := &http.Server{
