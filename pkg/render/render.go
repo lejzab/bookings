@@ -2,6 +2,7 @@ package render
 
 import (
 	"fmt"
+	"github.com/justinas/nosurf"
 	"github.com/lejzab/bookings/models"
 	"github.com/lejzab/bookings/pkg/config"
 	"html/template"
@@ -19,12 +20,13 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // AddDefaultData adds default date to template data
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate renders template using html/template
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
@@ -35,7 +37,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	if !ok {
 		log.Fatal("Could not get template from template cache")
 	}
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 	err := t.Execute(w, td)
 	if err != nil {
 		fmt.Printf("error parsing template: %s. error: %s\n", tmpl, err)
