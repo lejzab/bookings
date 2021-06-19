@@ -53,8 +53,12 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 //Reservation renders the reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	reservation := models.Reservation{}
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
@@ -74,7 +78,8 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	}
 
 	form := forms.New(r.PostForm)
-	form.Has("first_name", r)
+	form.Required("first_name", "last_name", "email")
+	form.MinLength("first_name", 4)
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
