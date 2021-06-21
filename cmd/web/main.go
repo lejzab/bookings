@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"github.com/lejzab/bookings/internal/config"
 	"github.com/lejzab/bookings/internal/handlers"
+	"github.com/lejzab/bookings/internal/models"
 	"github.com/lejzab/bookings/internal/render"
 	"log"
 	"net/http"
@@ -18,6 +20,8 @@ var session *scs.SessionManager
 
 // main is the main function
 func main() {
+	// register datatypes stored in session
+	gob.Register(models.Reservation{})
 	// change this to true when in production
 	app.InProduction = false
 
