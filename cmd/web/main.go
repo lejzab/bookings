@@ -47,6 +47,7 @@ func main() {
 		Addr:    portNumber,
 		Handler: routes(&app),
 	}
+	fmt.Printf("Started application on address %s\n", portNumber)
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
