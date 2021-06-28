@@ -56,9 +56,9 @@ func run() error {
 	}
 	app.TemplateCache = tc
 	app.UseCache = false
-	render.NewTemplates(&app)
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
+	render.NewTemplates(&app)
 
 	return nil
 }
