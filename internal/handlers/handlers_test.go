@@ -22,9 +22,9 @@ var theTests = []struct {
 	{"about", "/about", "GET", []postData{}, http.StatusOK},
 	{"gq", "/generals-quarters", "GET", []postData{}, http.StatusOK},
 	{"ms", "/majors-suite", "GET", []postData{}, http.StatusOK},
-	{"search availability", "/search-availability", "GET", []postData{}, http.StatusOK},
+	{"search-availability", "/search-availability", "GET", []postData{}, http.StatusOK},
 	{"contact", "/contact", "GET", []postData{}, http.StatusOK},
-	{"make reservation", "/make-reservation", "GET", []postData{}, http.StatusOK},
+	{"make-reservation", "/make-reservation", "GET", []postData{}, http.StatusOK},
 }
 
 func TestHandlers(t *testing.T) {
@@ -40,7 +40,7 @@ func TestHandlers(t *testing.T) {
 				t.Fatal(err)
 			}
 			if resp.StatusCode != e.expectedStatusCode {
-				t.Errorf("for %s, expected %d, got %d", e.name, e.expectedStatusCode, resp.StatusCode)
+				t.Errorf("for test %s, expected status code %d, got %d.", e.name, e.expectedStatusCode, resp.StatusCode)
 			}
 		} else {
 
