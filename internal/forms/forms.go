@@ -3,18 +3,22 @@ package forms
 import (
 	"fmt"
 	"github.com/asaskevich/govalidator"
-	"net/http"
 	"net/url"
 	"strings"
 )
 
-// Form creates a custom form struct
+// Form creates a custom form struct and embeds a url.Values object
 type Form struct {
 	url.Values
 	Errors errors
 }
 
-// NEW inicialises form struct
+// Valid returns true if there are no errors, otherwise false
+func (f *Form) Valid() bool {
+	return len(f.Errors) == 0
+}
+
+// New initializes a form struct
 func New(data url.Values) *Form {
 	return &Form{
 		data,
@@ -22,7 +26,7 @@ func New(data url.Values) *Form {
 	}
 }
 
-// Required add an error if required field is empty
+// Required checks for required fields
 func (f *Form) Required(fields ...string) {
 	for _, field := range fields {
 		value := f.Get(field)
@@ -32,31 +36,26 @@ func (f *Form) Required(fields ...string) {
 	}
 }
 
-// Valid return true if there are no errors, otherwise false
-func (f *Form) Valid() bool {
-	return len(f.Errors) == 0
-}
-
-// Has checks if form field is in post and not empy
-func (f *Form) Has(field string, r *http.Request) bool {
-	x := r.Form.Get(field)
+// Has checks if form field is in post and not empty
+func (f *Form) Has(field string) bool {
+	x := f.Get(field)
 	if x == "" {
 		return false
 	}
 	return true
 }
 
-// MinLegth adds error if field is short than min length
+// MinLength check for minimum length
 func (f *Form) MinLength(field string, length int) bool {
 	x := f.Get(field)
 	if len(x) < length {
-		f.Errors.Add(field, fmt.Sprintf("This field has min length %d", length))
+		f.Errors.Add(field, fmt.Sprintf("This field must be at least %d characters long", length))
 		return false
 	}
 	return true
 }
 
-// IsEmail checks if field is valid email
+// IsEmail checks for a valid email address
 func (f *Form) IsEmail(field string) {
 	if !govalidator.IsEmail(f.Get(field)) {
 		f.Errors.Add(field, "Invalid email address")

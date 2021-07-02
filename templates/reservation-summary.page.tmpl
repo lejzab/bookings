@@ -1,10 +1,13 @@
 {{template "base" .}}
+
 {{define "content"}}
     {{$res := index .Data "reservation"}}
+
     <div class="container">
         <div class="row">
             <div class="col">
                 <h1 class="mt-5">Reservation Summary</h1>
+
                 <hr>
 
                 <table class="table table-striped">
@@ -32,6 +35,7 @@
                     </tr>
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
