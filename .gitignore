@@ -15,3 +15,5 @@
 # vendor/
 .idea
 /booking
+coverage.out
+/database.yml
