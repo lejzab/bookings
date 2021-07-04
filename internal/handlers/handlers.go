@@ -4,10 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/lejzab/bookings/internal/config"
+	"github.com/lejzab/bookings/internal/driver"
 	"github.com/lejzab/bookings/internal/forms"
 	"github.com/lejzab/bookings/internal/helpers"
 	"github.com/lejzab/bookings/internal/models"
 	"github.com/lejzab/bookings/internal/render"
+	"github.com/lejzab/bookings/internal/repository"
+	"github.com/lejzab/bookings/internal/repository/dbrepo"
 	"net/http"
 )
 
@@ -17,12 +20,14 @@ var Repo *Repository
 // Repository is the repository type
 type Repository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 // NewRepo creates a new repository
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB:  dbrepo.NewPostgresRepo(db.SQL, a),
 	}
 }
 
